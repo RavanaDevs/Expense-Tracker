@@ -1,4 +1,8 @@
-import 'package:expense_tracker/pages/login_page.dart';
+// import 'package:expense_tracker/pages/login_page.dart';
+import 'package:expense_tracker/pages/profile_page.dart';
+// import 'package:expense_tracker/pages/signup_page.dart';
+import 'package:expense_tracker/pages/home_page.dart';
+import 'package:expense_tracker/pages/myexpenses_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -31,6 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginPage();
+    return const MyExpensesPage();
   }
 }

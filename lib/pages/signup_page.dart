@@ -1,10 +1,10 @@
 import 'package:expense_tracker/components/app_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/input_field.dart';
+import 'package:expense_tracker/components/button.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,14 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
         
-                const SizedBox(height: 25.0,),
+                const SizedBox(height: 15.0,),
         
                 const AppLogo(),
         
                 const SizedBox(height: 25.0,),
         
                 Text(
-                  "Log in to Track",
+                  "Sign Up to track",
                   style: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 20.0,
@@ -32,12 +32,23 @@ class LoginPage extends StatelessWidget {
                 ),
         
                 const SizedBox(height: 20.0,),
+
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: InputField(hintText: "Name"),
+                ),
+
+                const SizedBox(height: 15.0,),
         
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: InputField(hintText: "Email"),
                 ),
+
+
                 const SizedBox(height: 15.0,),
+
+
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.0),
                   child: InputField(hintText: "Password", obscuredText: true,),
@@ -46,13 +57,13 @@ class LoginPage extends StatelessWidget {
                 const SizedBox(height: 20.0,),
         
                 Button(
-                  btnText: "Log In",
+                  btnText: "Sign Up",
                   callbackFunction: () {
-                    print("Log In");
+                    print("Sign Up");
                   },
                   ),
         
-                const SizedBox(height: 40.0,),
+                const SizedBox(height: 20.0,),
         
                 Text(
                   "or",
@@ -63,14 +74,14 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 40.0,),
+                const SizedBox(height: 20.0,),
 
                 ImageButton(
                   imagePath: "assets/images/search.png", 
                   width: 60.0, 
                   height: 60.0,
                   callbackFunction: () {
-                    print("log in with google");
+                    print("sign up with google");
                   },
                   ),
 
@@ -91,7 +102,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Not a member? ",
+                      "Alrady a member? ",
                       style: TextStyle(
                         color: Colors.grey[700],
                         fontSize: 15.0,
@@ -100,7 +111,7 @@ class LoginPage extends StatelessWidget {
                     ),
 
                     const Text(
-                      "Register",
+                      "Sign In",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 15.0,
@@ -114,7 +125,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      )
     );
   }
 }
