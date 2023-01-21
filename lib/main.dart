@@ -1,8 +1,9 @@
-// import 'package:expense_tracker/pages/login_page.dart';
+import 'package:expense_tracker/pages/login_page.dart';
 import 'package:expense_tracker/pages/profile_page.dart';
-// import 'package:expense_tracker/pages/signup_page.dart';
 import 'package:expense_tracker/pages/home_page.dart';
 import 'package:expense_tracker/pages/myexpenses_page.dart';
+import 'package:expense_tracker/pages/signup_page.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -20,21 +21,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/':(context) => const LoginPage(),
+        '/sign-up':(context) => const SignUpPage(),
+        '/home':(context) => const HomePage(),
+        '/profile':(context) => const ProfilePage(),
+        '/expenses':(context) => const MyExpensesPage(),
+      },
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-    return const MyExpensesPage();
   }
 }

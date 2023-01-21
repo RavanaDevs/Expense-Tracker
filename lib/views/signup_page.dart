@@ -110,13 +110,16 @@ class SignUpPage extends StatelessWidget {
                       )
                     ),
 
-                    const Text(
-                      "Sign In",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w800
-                      )
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Text(
+                        "Sign In",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w800
+                        )
+                      ),
                     )
                   ],
                 )

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/input_field.dart';
 import 'package:flutter/material.dart';
@@ -74,18 +72,24 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                        // to expenses
                         CustomIconButton(
                           icon: const Icon(Icons.bar_chart_outlined, size: 50.0,),
                           width: 80.0,
                           height: 80.0,
-                          callbackFunction: (){},
+                          callbackFunction: (){
+                            Navigator.pushNamed(context, '/expenses');
+                          },
                         ),
 
+                        // to settings
                         CustomIconButton(
-                          icon: const Icon(Icons.settings, size: 50.0,),
+                          icon: const Icon(Icons.supervised_user_circle, size: 50.0,),
                           width: 80.0,
                           height: 80.0,
-                          callbackFunction: (){},
+                          callbackFunction: (){
+                            Navigator.pushNamed(context, '/profile');
+                          },
                         ),
                       ],
                     ),

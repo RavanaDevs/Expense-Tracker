@@ -23,9 +23,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   padding: const EdgeInsets.only(left: 25.0),
                   child: Row(
                     children: [
+                      // back button
                       CustomIconButton(
                         icon: const Icon(Icons.arrow_back), 
-                        callbackFunction: (){},
+                        callbackFunction: (){
+                          Navigator.pop(context);
+                        },
                       )
                     ],
                   ),

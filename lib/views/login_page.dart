@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/input_field.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import '../firebase_options.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
@@ -44,11 +48,11 @@ class LoginPage extends StatelessWidget {
                 ),
         
                 const SizedBox(height: 20.0,),
-        
+// login ==============================>                
                 Button(
                   btnText: "Log In",
                   callbackFunction: () {
-                    print("Log In");
+                    Navigator.pushNamed(context, '/home');
                   },
                   ),
         
@@ -99,13 +103,18 @@ class LoginPage extends StatelessWidget {
                       )
                     ),
 
-                    const Text(
-                      "Register",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w800
-                      )
+                    GestureDetector(
+                      onTap: () {
+                       Navigator.pushNamed(context, '/sign-up');
+                      },
+                      child: const Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w800
+                        )
+                      ),
                     )
                   ],
                 )
