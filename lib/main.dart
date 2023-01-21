@@ -1,8 +1,8 @@
-import 'package:expense_tracker/pages/login_page.dart';
-import 'package:expense_tracker/pages/profile_page.dart';
-import 'package:expense_tracker/pages/home_page.dart';
-import 'package:expense_tracker/pages/myexpenses_page.dart';
-import 'package:expense_tracker/pages/signup_page.dart';
+import 'package:expense_tracker/views/login_page.dart';
+import 'package:expense_tracker/views/profile_page.dart';
+import 'package:expense_tracker/views/home_page.dart';
+import 'package:expense_tracker/views/myexpenses_page.dart';
+import 'package:expense_tracker/views/signup_page.dart';
 
 import 'package:flutter/material.dart';
 

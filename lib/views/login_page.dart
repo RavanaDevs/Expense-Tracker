@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/input_field.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import '../firebase_options.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
