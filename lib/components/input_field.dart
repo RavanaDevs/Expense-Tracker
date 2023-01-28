@@ -5,15 +5,24 @@ class InputField extends StatelessWidget {
   final String? hintText;
   final bool obscuredText;
   final TextInputType? inputType;
+  final TextEditingController? controller;
 
-  const InputField({super.key, this.hintText, this.obscuredText = false, this.inputType = TextInputType.name});
+  const InputField({
+    super.key, 
+    this.hintText, 
+    this.obscuredText = false, 
+    this.inputType = TextInputType.name,
+    this.controller
+    });
 
 
 
   @override
   Widget build(BuildContext context) {
+
     return TextField(
         keyboardType: inputType,
+        controller: controller,
         decoration: InputDecoration(
           
           filled: true,
