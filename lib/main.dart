@@ -1,3 +1,4 @@
+import 'package:expense_tracker/views/auth_page.dart';
 import 'package:expense_tracker/views/login_page.dart';
 import 'package:expense_tracker/views/profile_page.dart';
 import 'package:expense_tracker/views/home_page.dart';
@@ -6,7 +7,16 @@ import 'package:expense_tracker/views/signup_page.dart';
 
 import 'package:flutter/material.dart';
 
-void main() {
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
   runApp(const MyApp());
 }
 
@@ -23,7 +33,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/':(context) => const LoginPage(),
+        '/':(context) => const AuthPage(),
+        '/login':(context) => const LoginPage(),
         '/sign-up':(context) => const SignUpPage(),
         '/home':(context) => const HomePage(),
         '/profile':(context) => const ProfilePage(),

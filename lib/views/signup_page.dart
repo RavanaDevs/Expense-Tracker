@@ -1,13 +1,34 @@
 import 'package:expense_tracker/components/app_logo.dart';
+import 'package:expense_tracker/firebase_utils/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/components/input_field.dart';
 import 'package:expense_tracker/components/button.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
+
   const SignUpPage({super.key});
 
   @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[200],
@@ -32,34 +53,28 @@ class SignUpPage extends StatelessWidget {
                 ),
         
                 const SizedBox(height: 20.0,),
-
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: InputField(hintText: "Name"),
-                ),
-
-                const SizedBox(height: 15.0,),
         
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: InputField(hintText: "Email"),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: InputField(hintText: "Email", controller: emailController,),
                 ),
 
 
                 const SizedBox(height: 15.0,),
 
 
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: InputField(hintText: "Password", obscuredText: true,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: InputField(hintText: "Password", obscuredText: true, controller: passwordController,),
                 ),
         
                 const SizedBox(height: 20.0,),
         
                 Button(
                   btnText: "Sign Up",
-                  callbackFunction: () {
-                    print("Sign Up");
+                  callbackFunction: () async {
+                    await signupWithEmailAndPassword(email: emailController.text, password: passwordController.text, context: context);
+                    Navigator.pushNamed(context, '/login');
                   },
                   ),
         
@@ -111,7 +126,7 @@ class SignUpPage extends StatelessWidget {
                     ),
 
                     GestureDetector(
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Navigator.pushNamed(context, '/login'),
                       child: const Text(
                         "Sign In",
                         style: TextStyle(

@@ -1,14 +1,30 @@
 import 'package:expense_tracker/components/button.dart';
+import 'package:expense_tracker/views/login_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if(snapshot.hasData){
+          return const _ProfilePage();
+        }else{
+          return const LoginPage();
+        }
+      },
+    );
+  }
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _ProfilePage extends StatelessWidget {
+
+  const _ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       CustomIconButton(
                         icon: const Icon(Icons.arrow_back), 
                         callbackFunction: (){
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, '/home');
                         },
                       )
                     ],
@@ -60,9 +76,9 @@ class _ProfilePageState extends State<ProfilePage> {
           
                 const SizedBox(height: 10.0,),
           
-                const Text(
-                  "Kavindu Sanjula",
-                  style: TextStyle(
+                Text(
+                  FirebaseAuth.instance.currentUser?.email ?? "No user",
+                  style: const TextStyle(
                     fontSize: 22.0,
                     color: Colors.blue
                   ),
@@ -90,7 +106,9 @@ class _ProfilePageState extends State<ProfilePage> {
           
                 const SizedBox(height: 150.0,),
           
-                Button(btnText: "Log Out", callbackFunction: (){}),
+                Button(btnText: "Log Out", callbackFunction: (){
+                  FirebaseAuth.instance.signOut();
+                }),
               ],
             ),
           ),

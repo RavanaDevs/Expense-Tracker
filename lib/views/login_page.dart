@@ -1,11 +1,29 @@
 import 'package:expense_tracker/components/app_logo.dart';
+import 'package:expense_tracker/firebase_utils/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/input_field.dart';
 
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context)  {
@@ -35,14 +53,14 @@ class LoginPage extends StatelessWidget {
         
                 const SizedBox(height: 20.0,),
         
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: InputField(hintText: "Email"),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: InputField(hintText: "Email", controller: emailController,),
                 ),
                 const SizedBox(height: 15.0,),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.0),
-                  child: InputField(hintText: "Password", obscuredText: true,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                  child: InputField(hintText: "Password", obscuredText: true, controller: passwordController,),
                 ),
         
                 const SizedBox(height: 20.0,),
@@ -50,11 +68,15 @@ class LoginPage extends StatelessWidget {
                 Button(
                   btnText: "Log In",
                   callbackFunction: () {
-                    Navigator.pushNamed(context, '/home');
+                    signInWithEmailAndPassword(
+                      email: emailController.text, 
+                      password: passwordController.text, 
+                      context: context
+                    );
                   },
                   ),
         
-                const SizedBox(height: 40.0,),
+                const SizedBox(height: 20.0,),
         
                 Text(
                   "or",
@@ -65,7 +87,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 40.0,),
+                const SizedBox(height: 20.0,),
 
                 ImageButton(
                   imagePath: "assets/images/search.png", 
@@ -103,7 +125,7 @@ class LoginPage extends StatelessWidget {
 
                     GestureDetector(
                       onTap: () {
-                       Navigator.pushNamed(context, '/sign-up');
+                        Navigator.pushNamed(context, '/sign-up');
                       },
                       child: const Text(
                         "Register",
