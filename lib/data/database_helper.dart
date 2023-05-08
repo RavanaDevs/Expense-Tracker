@@ -4,16 +4,18 @@ import 'package:expense_tracker/data/models/expense.dart';
 class DataRepository{
   final db = FirebaseFirestore.instance;
 
-  Future<Expense?> getExpense(String id) async{
+  Future<List<Expense>> getExpensesList(String id) async{
+
+    List<Expense> expenseRecords = List<Expense>.empty(growable: true);
     
-    final ref = db.collection('dogs').doc(id);
-    final snapshot = await ref.get();
+    final querySnapshot = await db.collection('expense_records').where('user_id', isEqualTo: '1').get();
 
-    if(snapshot.exists){
-      final dog = Expense.fromMap(snapshot);
-      return dog;
+    for (var snapshot in querySnapshot.docs){
+      if (snapshot.exists){
+        final data = Expense.fromMap(snapshot.data());
+        expenseRecords.add(data);
+      }
     }
-
-    return null;
+    return expenseRecords;
   }
 }

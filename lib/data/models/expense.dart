@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Expense{
 
   String? userId;
@@ -23,14 +21,18 @@ class Expense{
     };
   }
 
-  factory Expense.fromMap(DocumentSnapshot doc){
-    final data = doc.data() as Map<String, dynamic>;
+  factory Expense.fromMap(Map<String, dynamic> data){
     return Expense(
       userId: data['user_id'],
       description: data['description'],
-      amount: data['amount'],
-      time: data['time']
+      amount: double.parse(data['amount'].toString()),
+      time: DateTime.tryParse(data['time'].toDate().toString()),
     );
+  }
+
+  @override
+  String toString() {
+    return "Expense ${userId} - ${amount} - ${time}";
   }
 
 }

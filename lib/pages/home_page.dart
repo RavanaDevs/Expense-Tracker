@@ -1,5 +1,6 @@
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/text_field.dart';
+import 'package:expense_tracker/data/database_helper.dart';
 import 'package:expense_tracker/utils/auth_helper.dart';
 import 'package:expense_tracker/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   addExpense(){
-    print(AuthHelper().user.uid);
+    DataRepository().getExpensesList('1').then((value) {
+      print(value);
+    });
   }
 
   @override
