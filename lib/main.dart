@@ -1,4 +1,5 @@
 import 'package:expense_tracker/firebase_options.dart';
+import 'package:expense_tracker/pages/add_expense_page.dart';
 import 'package:expense_tracker/pages/home_page.dart';
 import 'package:expense_tracker/pages/login_page.dart';
 import 'package:expense_tracker/pages/signup_page.dart';
@@ -23,7 +24,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainPage(),
+      initialRoute: '/',
+      routes: {
+        '/' :(context) => const MainPage(),
+        '/add-expense':(context) => const AddExpensePage(),
+      },
     );
   }
 }

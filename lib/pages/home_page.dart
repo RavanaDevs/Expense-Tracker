@@ -1,8 +1,6 @@
-import 'package:expense_tracker/components/button.dart';
-import 'package:expense_tracker/components/text_field.dart';
+import 'package:expense_tracker/components/expense_card.dart';
 import 'package:expense_tracker/data/database_helper.dart';
 import 'package:expense_tracker/utils/auth_helper.dart';
-import 'package:expense_tracker/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,20 +28,27 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Padding(padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
-        child: Column(
-          children: [
-            15.0.spaceY,
-            const Text('Add Expence'),
-            20.0.spaceY,
-            textField(hintText: 'Description'),
-            10.0.spaceY,
-            textField(hintText: 'Amount'),
-            10.0.spaceY,
-            primaryButton(text: 'Add', onTap: addExpense)
-
-          ],
-        ),
-      )
+        child: FutureBuilder(
+          future: DataRepository().getExpensesList('1'),
+          builder: (context, snapshot) {
+            if(snapshot.hasData){
+              final data = snapshot.data;
+              return ListView.builder(
+                itemCount: data!.length,
+                itemBuilder:(context, index) {
+                  return expenseCard(data[index].time.toString(), data[index].amount.toString(), data[index].description);
+                },
+              );
+            }else{
+              return const Text('no data');
+            }
+          },
+        )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){Navigator.of(context).pushNamed('/add-expense');},
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
