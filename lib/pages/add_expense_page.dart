@@ -1,6 +1,8 @@
 import 'package:expense_tracker/components/button.dart';
 import 'package:expense_tracker/components/text_field.dart';
 import 'package:expense_tracker/data/database_helper.dart';
+import 'package:expense_tracker/data/models/expense.dart';
+import 'package:expense_tracker/utils/auth_helper.dart';
 import 'package:expense_tracker/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,9 +15,18 @@ class AddExpensePage extends StatefulWidget {
 
 class _AddExpensePageState extends State<AddExpensePage> {
 
+  final descriptionController = TextEditingController();
+  final amountController = TextEditingController();
+
   addExpense(){
-    DataRepository().getExpensesList('1').then((value) {
-      print(value);
+    final uid = AuthHelper().user.uid;
+    final amount = amountController.text;
+    final desc = descriptionController.text;
+    final time = DateTime.now();
+
+    final expense = Expense(description: desc, amount: double.parse(amount), userId: uid, time: time);
+    DataRepository().addExpense(expense).then((value){
+      Navigator.pop(context);
     });
   }
 
@@ -31,9 +42,9 @@ class _AddExpensePageState extends State<AddExpensePage> {
             15.0.spaceY,
             const Text('Add Expence'),
             20.0.spaceY,
-            textField(hintText: 'Description'),
+            textField(hintText: 'Description', controller: descriptionController),
             10.0.spaceY,
-            textField(hintText: 'Amount'),
+            textField(hintText: 'Amount', controller: amountController, keyboardType: TextInputType.number),
             10.0.spaceY,
             primaryButton(text: 'Add', onTap: addExpense)
 

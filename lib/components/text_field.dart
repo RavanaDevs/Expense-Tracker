@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-TextField textField({hintText = String, password = false}){
+TextField textField({hintText = String, password = false, controller, keyboardType = TextInputType.name}){
   return TextField(
+    controller: controller,
     decoration: InputDecoration(
       hintText: hintText,
       border: OutlineInputBorder(
@@ -10,5 +11,6 @@ TextField textField({hintText = String, password = false}){
       )
     ),
     obscureText: password,
+    keyboardType: keyboardType,
   );
 }

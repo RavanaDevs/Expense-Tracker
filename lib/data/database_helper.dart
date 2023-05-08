@@ -8,7 +8,7 @@ class DataRepository{
 
     List<Expense> expenseRecords = List<Expense>.empty(growable: true);
     
-    final querySnapshot = await db.collection('expense_records').where('user_id', isEqualTo: '1').get();
+    final querySnapshot = await db.collection('expense_records').where('user_id', isEqualTo: id).get();
 
     for (var snapshot in querySnapshot.docs){
       if (snapshot.exists){
@@ -17,5 +17,10 @@ class DataRepository{
       }
     }
     return expenseRecords;
+  }
+
+  Future<String> addExpense(Expense expense) async{
+    final ref = await db.collection('expense_records').add(expense.toMap());
+    return ref.id;
   }
 }
